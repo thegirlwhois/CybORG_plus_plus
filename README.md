@@ -160,7 +160,7 @@ If you use this repository in your research, please cite it as follows:
 
 ```bibtex
 @misc{CybORG_plus_plus,
-  author = {Harry Emerson and Liz Bates and Vasilios Mavroudis and Chris Hicks},
+  author = {Harry Emerson and Liz Bates and Chris Hicks and Vasilios Mavroudis},
   title = {Cyborg++: A Toolkit for Reinforcement Learning Research Focused on Autonomous Network Defense},
   year = {2024},
   publisher = {GitHub},
