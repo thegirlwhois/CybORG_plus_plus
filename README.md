@@ -31,7 +31,8 @@ The following info is to the best of our knowledge, and if there are intricacies
 
 <p align="center">
     <img src="Extras/images/True_Network_Diagram.png" alt="Diagram of the system" width="600"/>
-    <figcaption style="text-align: center;"><em>Figure 1: CAGE 2 CybORG Network Diagram. The orange dotted line indicates a shared firewall between the User subnet and Enterprise subnet. The red dotted line indicates the defender is not a stationary host in the network, and that User0 is where red maintains a foothold on the system whilst not functioning as a proper user host.
+    <figcaption style="text-align: center;"><em>Figure 1: CAGE 2 CybORG Network Diagram. The orange dotted line 
+indicates a shared firewall between the User subnet and Enterprise subnet. The red dotted line indicates the defender is not a stationary host in the network, and that User0 is where red maintains a foothold on the system whilst not functioning as a proper user host.
 </em></figcaption>
 </p>
 
