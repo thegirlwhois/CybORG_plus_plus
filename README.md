@@ -155,12 +155,12 @@ the `Debugged_CybORG/CybORG/CybORG/Shared/Actions/AbstractActions/ExploitRemoteS
 If you use this repository in your research, please cite it as follows:
 
 ```bibtex
-@misc{CAGE_2_Fixed,
-  author = {Harry Emerson, Liz Bates, Vasilios Mavroudis, Chris Hicks},
+@misc{CybORG_plus_plus,
+  author = {Harry Emerson and Liz Bates and Chris Hicks and Vasilios Mavroudis},
   title = {Cyborg++: A Toolkit for Reinforcement Learning Research Focused on Autonomous Network Defense},
   year = {2024},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{git remote set-url origin https://github.com/alan-turing-institute/CybORG_plus_plus
-}},
+  howpublished = {\url{https://github.com/alan-turing-institute/CybORG_plus_plus}},
 }
+
