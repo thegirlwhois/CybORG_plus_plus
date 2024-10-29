@@ -83,7 +83,8 @@ The environment is based off of the most up to date version of [CAGE 2](https://
 
 ## Speed:
 
-The simplification and parallelisation of the CybORG environment signficiantly improves the environment execution speed, resulting in almost 1000x acceleration improvement when run on a single CPU. 
+The simplification and parallelisation of the CybORG environment significantly improves the environment execution 
+speed, resulting in almost 1000x acceleration improvement when run on a single CPU. 
 
 | Number of Episodes | CAGE 2 Time (s) | Mini CAGE Time (s) | Improvement |
 | ------------------ | --------------- |----------------------| ----------- |
@@ -96,7 +97,7 @@ The simplification and parallelisation of the CybORG environment signficiantly i
 ## Performance:
 
 To confirm the equivalence between the mini_CAGE environment and the CAGE 2 environment, reward was compared across 6 
-combinations of attacker-defender pairs over 500 epsiodes for 100 timesteps each. +/- indicates the standard error.
+combinations of attacker-defender pairs over 500 episodes for 100 timesteps each. +/- indicates the standard error.
 
 | Attacker | Defender      | CAGE 2 Score | Mini CAGE Score |
 | -------- | ------------- | ------------ |-------------------|
