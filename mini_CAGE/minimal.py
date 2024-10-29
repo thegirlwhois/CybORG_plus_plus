@@ -816,7 +816,7 @@ class SimplifiedCAGE:
         # -> given exploit index return compatible decoys
         # -> for each host return built in exploits
         # -> for each host return compatible decoys
-        self.exploit_map = exploits_to_decoys(remove_bug=self.remove_bugs)
+        self.exploit_map = exploits_to_decoys(remove_bugs=self.remove_bugs)
         self.default_exploits = default_host_exploits(remove_bug=self.remove_bugs)
         self.default_decoys = np.tile(
             np.expand_dims(default_defender_decoys(),
