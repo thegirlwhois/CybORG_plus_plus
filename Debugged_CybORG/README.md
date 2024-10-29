@@ -187,7 +187,7 @@ Another Cage 2 repo with a few fixes:
 
     */CybORG_plus_plus/Debugged_CybORG/CybORG/CybORG/Agents/Wrappers/BlueTableWrapper.py*
 
-    The BlueTableWrapper sometimes incorrectly classifies a host exploit as a scan, which gives rise to a lower detection rate than the specified 95%. The problem arises from the if-else statement in the wrapper and can be corrected by recognising that in CAGE the presence of port 4444 being open always indicates an exploit::
+    The BlueTableWrapper sometimes incorrectly classifies a host exploit as a scan, which gives rise to a lower detection rate than the specified 95%. The problem arises from the if-else statement in the wrapper and can be corrected by recognising that in CAGE the presence of port 4444 being open always indicates an exploit:
 
     **Initially (~171):**
     
