@@ -9,7 +9,7 @@ authors:
     given-names: "Chris"
   - family-names: "Mavroudis"
     given-names: "Vasilios"
-title: "Cyborg++: A Toolkit for Reinforcement Learning Research Focused on Autonomous Network Defense"
+title: "Cyborg++: An enhanced gym for the development of autonomous cyber agents"
 version: "1.0.0"
 repository-code: "https://github.com/alan-turing-institute/CybORG_plus_plus"
 license: "MIT"
