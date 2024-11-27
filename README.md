@@ -18,6 +18,17 @@ This repository contains:
   - [Mini CAGE 2 CybORG Reimplementation](./mini_CAGE)
 - Additional information on how the environment works and things we’ve learnt that may be helpful for future users
 
+If you use this repository in your research, please cite it as follows:
+
+```bibtex
+@article{emerson2024cyborg++,
+  title={Cyborg++: An enhanced gym for the development of autonomous cyber agents},
+  author={Emerson, Harry and Bates, Liz and Hicks, Chris and Mavroudis, Vasilios},
+  journal={arXiv preprint arXiv:2410.16324},
+  year={2024}
+}
+```
+
 # Extended CAGE 2 Developer Guide
 
 This guide extends the previous CAGE 2 developer guide, highlighting features of the environment that are useful for successful model implementation. 
@@ -151,17 +162,6 @@ the `Debugged_CybORG/CybORG/CybORG/Shared/Actions/AbstractActions/ExploitRemoteS
 | Op_host2     | 22                 | ROOT               | SSHD                 |
 | Defender          | 22, 53, 78         | ROOT, SYSTEMD+     | SSHD, SYSTEMD        |
 
-## References
 
-If you use this repository in your research, please cite it as follows:
 
-```bibtex
-@misc{CybORG_plus_plus,
-  author = {Harry Emerson and Liz Bates and Chris Hicks and Vasilios Mavroudis},
-  title = {Cyborg++: A Toolkit for Reinforcement Learning Research Focused on Autonomous Network Defense},
-  year = {2024},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/alan-turing-institute/CybORG_plus_plus}},
-}
 
