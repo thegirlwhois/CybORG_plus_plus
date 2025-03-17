@@ -1,6 +1,6 @@
-
+import gym
+from gym import spaces
 import numpy as np
-
 
 #############################################################
 # TODO: need to make compatible with different architectures
@@ -598,7 +598,7 @@ def update_blue(
     '''
     Update the environmental state following a blue action.
     '''
-
+    
     # copy the current state
     action_reward = np.zeros((state.shape[0], 1))
     next_state = updated_state.copy()
@@ -607,6 +607,9 @@ def update_blue(
     # filter actions that are not allowed
     # user0 cannot be restored
     blue_mask = check_blue_action(updated_state, decoys)
+    if isinstance(action, (int, np.int64)):  
+        action = np.array([action])
+    
     action_filter = blue_mask[
         np.arange(len(action)), action.reshape(-1).astype(int)]
     success = -np.ones((state.shape[0], 1))
@@ -782,15 +785,19 @@ def update_blue(
 
 
 
-class SimplifiedCAGE:
+class SimplifiedCAGE(gym.Env):
     '''
     A simplified version of the CAGE 2 Challenge environment 
     with faster execution speed and parallelism.
     '''
+
     def __init__(self, num_envs, num_nodes=13, remove_bugs=False):
 
+        super(SimplifiedCAGE, self).__init__()
         # basic parameters
         self.num_envs = num_envs
+        self.observation_space = spaces.Box(low=0, high=1, shape=(52,), dtype=np.float32)  # Adjust if needed
+        self.action_space = spaces.Discrete(3)  # 3 actions: Block, Alert, Ignore
         self.num_nodes = num_nodes
         self.remove_bugs = remove_bugs
 
@@ -888,42 +895,56 @@ class SimplifiedCAGE:
 
 
     def reset(self):
+        state = self._set_init(num_envs=self.num_envs, num_nodes=self.num_nodes)
+    
+    # ✅ Extract only the Blue agent's observation
+        blue_state = state["Blue"].squeeze().astype(np.float32)  # Convert to 1D NumPy array
+        blue_state = blue_state[:52] if blue_state.shape[0] > 52 else np.pad(blue_state, (0, 52 - blue_state.shape[0]), 'constant')
 
-        # get the red and blue observation
-        state = self._set_init(
-            num_envs=self.num_envs, 
-            num_nodes=self.num_nodes)
-        info = self._get_info()
+        print("DEBUG FINAL: Blue State output -->", blue_state)  # 🔥 Final check
 
-        return state, info
+        return blue_state.astype(np.float32)  # ✅ No more dictionaries!
+
+    def _generate_red_action(self):
+        return np.random.randint(0, self.action_space.n, size=(self.num_envs,))
 
 
-    def step(self, red_action, blue_action):
-        err_msg = 'Ensure batch size is correct.'
-        assert red_action.shape[0] == self.num_envs, err_msg
-        assert blue_action.shape[0] == self.num_envs, err_msg
 
-        # modify the state based on the actions
-        # 1.0s over 10_000
+    def step(self, blue_action):
+        # Generate a red (attacker) action automatically
+        red_action = self._generate_red_action()  # Implement this function
+
+        # Ensure blue_action is correctly formatted
+        if isinstance(blue_action, np.ndarray):
+            blue_action = blue_action.item()  # Convert array to scalar
+
+        # Process the state and reward based on actions
         true_state, reward = self._process_actions(
             self.state, red_action, blue_action, self.subnets)
+        
         self.state = true_state.copy()
 
-        # update the reward based on access
-        # 0.001s over 10_000
-        reward = self._process_reward(true_state, reward, self.impacted)
-        done = np.zeros((true_state.shape[0], 1))
+        # Update the reward based on attack impact
+        reward_dict = self._process_reward(true_state, reward, self.impacted)
+        reward = float(reward_dict["Blue"])
 
-        # process the state for different observers
-        # log the processed states 
-        # 0.01s over 10_000
+        done = np.zeros((true_state.shape[0], 1))  # Always return done=False
+
+        # Process the state for Blue agent
         next_state = self._process_state(
             state=true_state, logged_decoys=self.current_decoys, 
             red_action=red_action, blue_action=blue_action)
+        
         self.proc_states = next_state
         info = self._get_info()
 
-        return next_state, reward, done, info
+        # Extract only Blue agent's observation
+        # blue_state = next_state["Blue"].squeeze().astype(np.float32)
+        blue_state = next_state["Blue"].squeeze().astype(np.float32)
+        blue_state = blue_state[:52] if blue_state.shape[0] > 52 else np.pad(blue_state, (0, 52 - blue_state.shape[0]), 'constant')
+
+        return blue_state, reward, done, info
+
         
 
     def get_mask(self, state, decoys):
